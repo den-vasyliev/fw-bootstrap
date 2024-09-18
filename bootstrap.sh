@@ -67,6 +67,47 @@ flux create kustomization flux-system \
 
 
 # Terraform with GitOps
+flux push artifact oci://ghcr.io/den-vasyliev/fw-bootstrap:$(git rev-parse --short HEAD) \
+    --creds $GITHUB_USER:$GITHUB_TOKEN \
+    --path="./terraform" \
+    --source="$(git config --get remote.origin.url)" \
+    --revision="$(git branch --show-current)/$(git rev-parse HEAD)"
+
+flux tag artifact oci://ghcr.io/den-vasyliev/fw-bootstrap@sha256:b85b82c402ee88d22f6b1b0dab241f96e248dd78ee1e0010c1a216cf9d74c565 \
+--tag main --creds $GITHUB_USER:$GITHUB_TOKEN 
+
+flux create source oci terraform-oci \
+--url=oci://ghcr.io/den-vasyliev/fw-bootstrap \
+--tag=main \
+--interval=1m --export
+
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: terraform-oci
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  provider: generic
+  ref:
+    tag: main
+  url: oci://ghcr.io/den-vasyliev/fw-bootstrap
+
+
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: bootstrap-tf-oci
+spec:
+  path: ./
+  approvePlan: ""
+  interval: 1m
+  storeReadablePlan: human
+  sourceRef:
+    kind: OCIRepository
+    name: helloworld-oci
+
+
 ## Create git source for the tf-config repository
 flux create source git tf-config -n flux-system --url=https://github.com/den-vasyliev/fwdays-workshop --branch=tf-controller --interval=5m --export
 
