@@ -25,6 +25,7 @@ https://github.com/den-vasyliev/fwdays-workshop/blob/tf-controller/tf-gke-cluste
 
 # Prepare the SOPS secret
 ## Generate a new age key
+rm ~/.ssh/age-key.txt
 age-keygen -o ~/.ssh/age-key.txt
 
 ## Create a Kubernetes secret for the age key
@@ -34,24 +35,35 @@ k create secret generic sops-age \
 --from-file=age.agekey=/dev/stdin
 
 ## Export the public key
-AGE_PUB_KEY=age1luqthsd4r5wc09l989s5yuudcrxfkrd9fka502vqvylk3xa29e9qkre4n3
+export AGE_PUB_KEY=age1luqthsd4r5wc09l989s5yuudcrxfkrd9fka502vqvylk3xa29e9qkre4n3
 
 
 # Create a Kubernetes secret for GCP authentication
 ## Create service account
 ## Create a service account key
 ## Create a Kubernetes secret for the service account key
+gcloud auth application-default login
 
-k create secret -n flux-system  generic k8s-k3s-secret --from-file=credentials=../../k8s-k3s-2cbd0214240e.json -o yaml --dry-run=client>k8s-k3s-secret.yaml
+k create secret -n flux-system  generic gcp-secret --from-file=credentials=${$HOME}/.config/gcloud/application_default_credentials.json -o yaml --dry-run=client>gcp-auth-secret.yaml
+#k create secret -n flux-system  generic k8s-k3s-secret --from-file=credentials=../../k8s-k3s-2cbd0214240e.json -o yaml --dry-run=client>k8s-k3s-secret.yaml
 
 ## Encrypt the secret using SOPS and the age key
 sops --age=$AGE_PUB_KEY --encrypt --encrypted-regex '^(data|stringData)$' --in-place gcp-auth-secret.yaml
 
 ## Enable decryption in flux with kustomization.yaml patch
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
+clusters/k3s/flux-system/kustomization.yaml
+patches:
+- path: sops-patch.yaml
+  target:
+    kind: Kustomization
+clusters/k3s/flux-system/sops-patch.yaml    
+flux create kustomization flux-system \
+--source=flux-system \
+--path=./clusters/k3s \
+--prune=true \
+--interval=10m \
+--decryption-provider=sops \
+--decryption-secret=sops-age --export
 
 
 # Terraform with GitOps
