@@ -14,6 +14,7 @@ apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
   name: bootstrap-gke-tf
+  namespace: default
 spec:
   path: ./
   approvePlan: ""
