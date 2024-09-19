@@ -7,7 +7,7 @@ spec:
   interval: 1m0s
   provider: generic
   secretRef:
-    name: flux-system
+    name: ghcr-secret
   ref:
     tag: main
   url: oci://ghcr.io/den-vasyliev/fw-bootstrap

@@ -107,6 +107,12 @@ spec:
     kind: OCIRepository
     name: helloworld-oci
 
+kubectl create secret docker-registry ghcr-secret \
+  --namespace=flux-system \
+  --docker-server=ghcr.io \
+  --docker-username=$GITHUB_USER \
+  --docker-password=$GITHUB_TOKEN \
+  --docker-email=den.vasyliev\@gmail.com 
 
 ## Create git source for the tf-config repository
 flux create source git tf-config -n flux-system --url=https://github.com/den-vasyliev/fwdays-workshop --branch=tf-controller --interval=5m --export
