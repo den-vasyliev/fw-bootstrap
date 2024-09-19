@@ -26,3 +26,5 @@ spec:
     kind: OCIRepository
     name: bootstrap-gke-oci
     namespace: flux-system
+  writeOutputsToSecret:
+  name: terraform-gke-outputs
