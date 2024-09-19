@@ -28,3 +28,7 @@ spec:
     namespace: flux-system
   writeOutputsToSecret:
   name: terraform-gke-outputs
+  vars:
+  - name: project_id
+    value: k8s-k3s
+  - 

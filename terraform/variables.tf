@@ -15,7 +15,7 @@ variable "region" {
 
 variable "cluster_name" {
   description = "The name of the GKE cluster"
-  default     = "fw-gke-cluster"
+  default     = "fw-cluster"
 
 }
 
