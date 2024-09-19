@@ -29,5 +29,10 @@ spec:
   vars:
   - name: project_id
     value: k8s-k3s
+  varsFrom:
+  - kind: Secret
+    name: gcp-secret
+    varsKeys:
+    - credentials
   writeOutputsToSecret:
     name: terraform-gke-outputs
