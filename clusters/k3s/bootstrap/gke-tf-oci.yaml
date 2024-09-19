@@ -23,3 +23,4 @@ spec:
   sourceRef:
     kind: OCIRepository
     name: bootstrap-gke-oci
+    namespace: flux-system
