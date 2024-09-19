@@ -73,7 +73,7 @@ flux push artifact oci://ghcr.io/den-vasyliev/fw-bootstrap:$(git rev-parse --sho
     --source="$(git config --get remote.origin.url)" \
     --revision="$(git branch --show-current)/$(git rev-parse HEAD)"
 
-flux tag artifact oci://ghcr.io/den-vasyliev/fw-bootstrap@sha256:b85b82c402ee88d22f6b1b0dab241f96e248dd78ee1e0010c1a216cf9d74c565 \
+flux tag artifact oci://ghcr.io/den-vasyliev/fw-bootstrap:$(git rev-parse --short HEAD) \
 --tag main --creds $GITHUB_USER:$GITHUB_TOKEN 
 
 flux create source oci terraform-oci \
