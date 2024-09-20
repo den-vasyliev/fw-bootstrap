@@ -26,7 +26,6 @@ spec:
     varsKeys:
     - credentials
   - kind: Secret
-    name: ghcr-login-secret
+    name: flux-system
     varsKeys:
-    - docker-username:github_org
-    - docker-password:github_token
+    - password:github_token

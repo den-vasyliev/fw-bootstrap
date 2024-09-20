@@ -162,7 +162,7 @@ flux create source oci bootstrap-gke-oci \
 --interval=1m --export
 ```
 
-### Create a GitHub Registry Secret
+### Create a GitHub Registry Login
 ```bash
 kubectl create secret docker-registry ghcr-login-secret \
   --namespace=flux-system \
