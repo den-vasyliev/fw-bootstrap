@@ -13,6 +13,12 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
+  # Enable client certificate authorization 
+  master_auth {
+    client_certificate_config {
+      issue_client_certificate = true
+    }
+  }
   # Enable Workload Identity
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
