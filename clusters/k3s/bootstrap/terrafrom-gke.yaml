@@ -1,16 +1,3 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
-metadata:
-  name: bootstrap-gke-oci
-  namespace: flux-system
-spec:
-  interval: 1m0s
-  provider: generic
-  secretRef:
-    name: ghcr-secret
-  ref:
-    tag: main
-  url: oci://ghcr.io/den-vasyliev/fw-bootstrap
 ---
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
@@ -29,10 +16,17 @@ spec:
   vars:
   - name: project_id
     value: k8s-k3s
+  - name: github_repository
+    value: fw-gke-flux
+  - name: github_org
+    value: den-vasyliev
   varsFrom:
   - kind: Secret
-    name: gcp-secret
+    name: gcp-auth-secret
     varsKeys:
     - credentials
-  writeOutputsToSecret:
-    name: terraform-gke-outputs
+  - kind: Secret
+    name: ghcr-login-secret
+    varsKeys:
+    - docker-username:github_org
+    - docker-password:github_token

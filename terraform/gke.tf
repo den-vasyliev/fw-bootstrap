@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.0"
-    }
-  }
-}
-
 locals {
   credentials = var.credentials != "" ? var.credentials : file(var.default_credentials_file_path)
 }
@@ -17,7 +8,7 @@ provider "google" {
   credentials = var.credentials
 }
 
-resource "google_container_cluster" "primary" {
+resource "google_container_cluster" "gke_cluster" {
   name           = var.cluster_name
   location       = var.region
   node_locations = [var.zone]

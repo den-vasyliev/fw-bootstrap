@@ -42,3 +42,19 @@ variable "default_credentials_file_path" {
   type        = string
   default     = "~/.config/gcloud/application_default_credentials.json"
 }
+
+variable "github_org" {
+  description = "GitHub organization"
+  type        = string
+}
+
+variable "github_repository" {
+  description = "GitHub repository"
+  type        = string
+}
+
+variable "github_token" {
+  description = "GitHub token"
+  sensitive   = true
+  type        = string
+}

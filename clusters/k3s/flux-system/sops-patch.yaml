@@ -7,7 +7,7 @@ spec:
   decryption:
     provider: sops
     secretRef:
-      name: sops-age
+      name: sops-agekey-secret
   interval: 10m0s
   path: ./clusters/k3s
   prune: true
