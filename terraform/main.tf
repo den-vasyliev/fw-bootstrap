@@ -23,7 +23,7 @@ resource "google_container_node_pool" "cpu_pool" {
   name       = "cpu-pool"
   location   = var.region
   cluster    = google_container_cluster.primary.name
-  node_count = 2
+  node_count = 3
 
   node_config {
     machine_type = var.machine_type
@@ -105,9 +105,9 @@ resource "github_repository" "this" {
 # Bootstrap Flux
 # ==========================================
 
-# resource "flux_bootstrap_git" "this" {
-#   depends_on = [github_repository.this]
+resource "flux_bootstrap_git" "this" {
+  depends_on = [github_repository.this]
 
-#   embedded_manifests = true
-#   path               = "clusters"
-# }
+  embedded_manifests = true
+  path               = "clusters"
+}
