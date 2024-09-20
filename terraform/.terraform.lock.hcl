@@ -25,7 +25,7 @@ provider "registry.terraform.io/fluxcd/flux" {
 
 provider "registry.terraform.io/hashicorp/google" {
   version     = "4.85.0"
-  constraints = "~> 4.0"
+  constraints = "~> 4.0, >= 4.47.0, != 4.49.0, != 4.50.0, < 7.0.0"
   hashes = [
     "h1:ZVDZuhYSIWhCkSuDkwFeSIJjn0/DcCxak2W/cHW4OQQ=",
     "zh:17d60a6a6c1741cf1e09ac6731433a30950285eac88236e623ab4cbf23832ca3",

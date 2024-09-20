@@ -13,16 +13,6 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
-  # Enable client certificate authorization 
-  master_auth {
-    client_certificate_config {
-      issue_client_certificate = true
-    }
-  }
-  # Enable Workload Identity
-  workload_identity_config {
-    workload_pool = "${var.project_id}.svc.id.goog"
-  }
 }
 
 resource "google_container_node_pool" "cpu_pool" {
@@ -65,7 +55,7 @@ resource "google_container_node_pool" "gpu_pool" {
       "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/trace.append",
       "https://www.googleapis.com/auth/service.management.readonly",
-      "https://www.googleapis.com/auth/servicecontrol",
+      "https://www.googleapis.com/auth/servicecontrol"
     ]
 
     labels = {
@@ -92,6 +82,19 @@ resource "google_container_node_pool" "gpu_pool" {
     }
   }
 }
+
+module "gke_auth" {
+  depends_on = [
+    google_container_cluster.primary
+  ]
+  source       = "terraform-google-modules/kubernetes-engine/google//modules/auth"
+  version      = ">= 33.0.0"
+  project_id   = var.project_id
+  cluster_name = google_container_cluster.primary.name
+  location     = var.region
+}
+
+data "google_client_config" "current" {}
 
 # ==========================================
 # Initialise a Github project
