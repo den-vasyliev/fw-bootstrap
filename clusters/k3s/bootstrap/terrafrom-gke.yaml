@@ -20,6 +20,8 @@ spec:
     value: fw-gke-flux
   - name: github_org
     value: den-vasyliev
+  - name: cluster_name
+    value: k8s-k3s
   varsFrom:
   - kind: Secret
     name: gcp-auth-secret
