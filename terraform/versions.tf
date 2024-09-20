@@ -14,9 +14,5 @@ terraform {
       source  = "integrations/github"
       version = ">= 6.1"
     }
-    kind = {
-      source  = "tehcyx/kind"
-      version = ">= 0.4"
-    }
   }
 }

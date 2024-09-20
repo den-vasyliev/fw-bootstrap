@@ -4,6 +4,9 @@
 [tfenv](https://github.com/tfutils/tfenv) - Terraform Version Manager
 ```bash
 brew install tfenv
+tfenv list
+tfenv install 1.5.7
+tfenv use 1.5.7
 ```
 
 ### Flux CLI
@@ -199,10 +202,8 @@ spec:
 
 ## Terraform Plan
 ```bash
-k describe secret tfplan-default-bootstrap-gke-tf -n flux-system
-kubectl get secret tfplan-default-bootstrap-gke-tf -n flux-system -o jsonpath="{.data.tfplan}" | base64 --decode | gunzip > plan
-tfenv install 1.5.7
-tfenv use 1.5.7
+k describe secret tfstate-default-bootstrap-gke-tf  -n flux-system
+kubectl get secret tfstate-default-bootstrap-gke-tf  -n flux-system -o jsonpath="{.data.tfstate}" | base64 --decode | gunzip > tfstate
 
 tfctl show plan -n flux-system bootstrap-gke-tf 
 ```
