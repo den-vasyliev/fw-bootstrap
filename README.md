@@ -177,7 +177,7 @@ kubectl create secret docker-registry ghcr-login-secret \
 sops --age=$AGE_PUB_KEY \
     --encrypt \
     --encrypted-regex '^(data|stringData)$' \
-    --in-place clusters/k3s/secrets/ghcr-secret.yaml
+    --in-place clusters/k3s/secrets/ghcr-login-secret.yaml
 ```
 
 ### Create a Terraform Resource and push it
