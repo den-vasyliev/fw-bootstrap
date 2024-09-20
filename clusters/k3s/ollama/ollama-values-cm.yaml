@@ -45,7 +45,7 @@ data:
     ollama:
       gpu:
         # -- Enable GPU integration
-        enabled: true
+        enabled: false
 
         # -- GPU type: 'nvidia' or 'amd'
         # If 'ollama.gpu.enabled', default value is nvidia
