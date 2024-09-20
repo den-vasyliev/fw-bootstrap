@@ -104,6 +104,7 @@ gcloud auth application-default login
 
 
 kubectl create secret generic gcp-auth-secret \
+  --namespace=flux-system \
   --from-literal=token="$(gcloud auth application-default print-access-token)" \
   -o yaml --dry-run=client > clusters/k3s/secrets/gcp-auth-secret.yaml
 
