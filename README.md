@@ -67,7 +67,7 @@ flux create hr tf-controller -n flux-system \
 ```
 
 ## Explore Terraform Code for GKE Cluster with GPU
-Check the example [here](https://github.com/den-vasyliev/fwdays-workshop/blob/tf-controller/tf-gke-cluster/main.tf).
+Check the example [here](./terraform/).
 
 ## Prepare the SOPS Secret
 
@@ -85,14 +85,16 @@ cat ~/.ssh/age-key.txt | k create secret generic sops-agekey-secret \
 
 ### Export the Public Key
 ```bash
-export AGE_PUB_KEY=age1luqthsd4r5wc09l989s5yuudcrxfkrd9fka502vqvylk3xa29e9qkre4n3
+export AGE_PUB_KEY=age1...
 ```
 
 ## Create a Kubernetes Secret for GCP Authentication
 #### Steps:
 1. Create service account.
 2. Create service account key.
-3. Create a Kubernetes secret for the service account key.
+3. Create a Kubernetes secret for the service account key
+
+or use `gcloud auth application-default login` to authenticate with GCP.
 ```bash
 gcloud auth application-default login
 
@@ -178,7 +180,7 @@ sops --age=$AGE_PUB_KEY \
     --in-place clusters/k3s/secrets/ghcr-secret.yaml
 ```
 
-## Create a Terraform Resource
+### Create a Terraform Resource and push it
 ```yaml
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
