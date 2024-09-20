@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   path: ./
-  approvePlan: "plan-main-322b8a3bd0"
+  approvePlan: "auto"
   interval: 1m
   storeReadablePlan: human
   sourceRef:
