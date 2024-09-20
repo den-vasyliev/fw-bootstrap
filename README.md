@@ -76,16 +76,16 @@ Check the example [here](./terraform/).
 rm ~/.ssh/age-key.txt
 age-keygen -o ~/.ssh/age-key.txt
 ```
-
-### Create a Kubernetes Secret for the Age Key
-```bash
-cat ~/.ssh/age-key.txt | k create secret generic sops-agekey-secret \
---namespace=flux-system --from-file=age.agekey=/dev/stdin
-```
-
 ### Export the Public Key
 ```bash
 export AGE_PUB_KEY=age1...
+```
+
+### Create a Kubernetes Secret for the Age Key
+```bash
+k create secret generic sops-agekey-secret \
+    --namespace=flux-system \
+    --from-file=${HOME}/.ssh/age-key.txt 
 ```
 
 ## Create a Kubernetes Secret for GCP Authentication
