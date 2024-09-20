@@ -83,9 +83,10 @@ export AGE_PUB_KEY=age1...
 
 ### Create a Kubernetes Secret for the Age Key
 ```bash
-k create secret generic sops-agekey-secret \
+
+k create secret generic sops-agekey-secret \ 
     --namespace=flux-system \
-    --from-file=${HOME}/.ssh/age-key.txt 
+    --from-file=age.agekey=${HOME}/.ssh/age-key.txt
 ```
 
 ## Create a Kubernetes Secret for GCP Authentication
