@@ -2,13 +2,7 @@ locals {
   credentials = var.credentials != "" ? var.credentials : file(var.default_credentials_file_path)
 }
 
-provider "google" {
-  project     = var.project_id
-  region      = var.region
-  credentials = var.credentials
-}
-
-resource "google_container_cluster" "gke_cluster" {
+resource "google_container_cluster" "primary" {
   name           = var.cluster_name
   location       = var.region
   node_locations = [var.zone]
