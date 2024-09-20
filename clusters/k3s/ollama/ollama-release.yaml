@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ollama
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: ollama
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ollama-chart
+      version: 0.37.0
+  interval: 10m0s
+  valuesFrom:
+  - kind: ConfigMap
+    name: ollama-secret-values

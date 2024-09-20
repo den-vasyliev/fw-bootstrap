@@ -1,0 +1,7 @@
+ll ol apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ollama-hr.yaml
+- ollama-release.yaml
+- ollama-values-cm.yaml
+

@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: ollama-chart
+  namespace: default
+spec:
+  interval: 10m0s
+  url: https://otwld.github.io/ollama-helm/
