@@ -91,15 +91,15 @@ resource "google_container_node_pool" "gpu_pool" {
 # Initialise a Github project
 # ==========================================
 
-# resource "github_repository" "this" {
-#   name        = var.github_repository
-#   description = var.github_repository
-#   visibility  = "private"
-#   auto_init   = true
+resource "github_repository" "this" {
+  name        = var.github_repository
+  description = var.github_repository
+  visibility  = "private"
+  auto_init   = true
 
-#   # Enable vulnerability alerts
-#   vulnerability_alerts = true
-# }
+  # Enable vulnerability alerts
+  vulnerability_alerts = true
+}
 
 # ==========================================
 # Bootstrap Flux
