@@ -169,7 +169,7 @@ data:
     # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
     livenessProbe:
       # -- Enable livenessProbe
-      enabled: true
+      enabled: false
 
       # -- Request path for livenessProbe
       path: /
