@@ -1,6 +1,3 @@
-locals {
-  credentials = var.credentials != "" ? var.credentials : file(var.default_credentials_file_path)
-}
 
 resource "google_container_cluster" "primary" {
   name           = var.cluster_name

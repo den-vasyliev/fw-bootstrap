@@ -24,7 +24,7 @@ spec:
   - kind: Secret
     name: gcp-auth-secret
     varsKeys:
-    - credentials
+    - token
   - kind: Secret
     name: flux-system
     varsKeys:

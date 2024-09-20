@@ -30,17 +30,10 @@ variable "zone" {
 
 }
 
-variable "credentials" {
+variable "access_token" {
   description = "Credentials for authentication"
   type        = string
   sensitive   = true
-  default     = ""
-}
-
-variable "default_credentials_file_path" {
-  description = "Path to the default credentials file"
-  type        = string
-  default     = "~/.config/gcloud/application_default_credentials.json"
 }
 
 variable "github_org" {

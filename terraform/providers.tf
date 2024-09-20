@@ -21,5 +21,6 @@ provider "github" {
 provider "google" {
   project = var.project_id
   region  = var.region
-  credentials = var.credentials
+  access_token = var.access_token
+  
 }
