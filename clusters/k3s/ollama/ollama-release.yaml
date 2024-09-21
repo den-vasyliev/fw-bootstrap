@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ollama-chart
-      version: 0.37.0
+      version: 0.59.0
   interval: 10m0s
   valuesFrom:
   - kind: ConfigMap
