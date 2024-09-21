@@ -91,8 +91,6 @@ module "gke_auth" {
   location     = var.region
 }
 
-data "google_client_config" "current" {}
-
 # ==========================================
 # Initialise a Github project
 # ==========================================

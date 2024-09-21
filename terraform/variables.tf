@@ -21,7 +21,7 @@ variable "cluster_name" {
 
 variable "machine_type" {
   description = "The machine type to use for the default node pool"
-  default     = "e2-medium"
+  default     = "e2-standard-4"
 }
 
 variable "zone" {
@@ -30,10 +30,10 @@ variable "zone" {
 
 }
 
-variable "access_token" {
-  description = "Credentials for authentication"
-  type        = string
-  sensitive   = true
+variable "credentials" {
+  description = "value of the credentials"
+  type = string
+  sensitive = true
 }
 
 variable "github_org" {
