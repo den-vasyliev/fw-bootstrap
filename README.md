@@ -98,19 +98,9 @@ k create secret generic sops-agekey-secret \
 2. Create service account key.
 3. Create a Kubernetes secret for the service account key
 
-or use `gcloud auth application-default login` to authenticate with GCP.
 ```bash
-gcloud auth application-default login
-
-
-kubectl create secret generic gcp-auth-secret \
-  --namespace=flux-system \
-  --from-literal=token="$(gcloud auth application-default print-access-token)" \
-  -o yaml --dry-run=client > clusters/k3s/secrets/gcp-auth-secret.yaml
-
-
 k create secret -n flux-system generic gcp-auth-secret \
-    --from-file=credentials=${HOME}/.config/gcloud/application_default_credentials.json \
+    --from-file=credentials=PATH-TO-SA-JSON \
     -o yaml --dry-run=client > clusters/k3s/secrets/gcp-auth-secret.yaml
 ```
 
