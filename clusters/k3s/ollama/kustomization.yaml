@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
 - ollama-hr.yaml
 - ollama-release.yaml
-- ollama-values-cm.yaml
+- ollama-values-configmap.yaml
 
