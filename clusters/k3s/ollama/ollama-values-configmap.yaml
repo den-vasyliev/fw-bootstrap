@@ -319,5 +319,5 @@ data:
     #     - echo init
 kind: ConfigMap
 metadata:
-  name: ollama-values-cm
+  name: ollama-values-configmap
   namespace: default

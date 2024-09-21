@@ -16,4 +16,4 @@ spec:
   interval: 10m0s
   valuesFrom:
   - kind: ConfigMap
-    name: ollama-secret-values
+    name: ollama-values-configmap
